@@ -807,7 +807,23 @@ cdef class _DrawList(object):
             thickness
         )
         free(pts)
-
+    # filled poly
+    def add_poly_filled(
+            self,
+            list points,
+            cimgui.ImU32 col
+        ):
+        num_points = len(points)
+        cdef cimgui.ImVec2 *pts
+        pts = <cimgui.ImVec2 *>malloc(num_points * cython.sizeof(cimgui.ImVec2))
+        for i in range(num_points):
+            pts[i] = _cast_args_ImVec2(points[i][0], points[i][1])
+        self._ptr.AddConvexPolyFilled(
+            pts,
+            num_points,
+            col
+        )
+        free(pts)
     # channels
 
     def channels_split(self, int channels_count):

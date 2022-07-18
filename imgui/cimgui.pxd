@@ -290,6 +290,11 @@ cdef extern from "imgui.h":
             float thickness
         ) except +  # ✓
 
+        void AddConvexPolyFilled(
+            const ImVec2* points,
+            int num_points,
+            ImU32 col
+        ) except +
 
         void ChannelsSplit(int channels_count) except + # ✓
         void ChannelsMerge() except + # ✓
